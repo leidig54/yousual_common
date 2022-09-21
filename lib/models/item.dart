@@ -4,7 +4,7 @@ class Item {
   String itemId;
   String itemName;
   String vendorId;
-  ItemCategory category;
+  ItemCategory itemCategory;
   double price;
   bool isAvailable;
   DateTime createdDateTime;
@@ -14,7 +14,7 @@ class Item {
     required this.itemId,
     required this.itemName,
     required this.vendorId,
-    required this.category,
+    required this.itemCategory,
     required this.price,
     this.isAvailable = true,
     required this.createdDateTime,
@@ -35,7 +35,7 @@ class Item {
       itemId: itemId ?? this.itemId,
       itemName: itemName ?? this.itemName,
       vendorId: vendorId ?? this.vendorId,
-      category: category ?? this.category,
+      itemCategory: category ?? itemCategory,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
       createdDateTime: createdDateTime ?? this.createdDateTime,
@@ -48,7 +48,7 @@ class Item {
       'itemId': itemId,
       'itemName': itemName,
       'vendorId': vendorId,
-      'category': category.toMap(),
+      'category': itemCategory.toMap(),
       'price': price,
       'isAvailable': isAvailable,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
@@ -61,7 +61,7 @@ class Item {
       itemId: map['itemId'] ?? '',
       itemName: map['itemName'] ?? '',
       vendorId: map['vendorId'] ?? '',
-      category: ItemCategory.fromMap(map['category']),
+      itemCategory: ItemCategory.fromMap(map['category']),
       price: map['price']?.toDouble() ?? 0.0,
       isAvailable: map['isAvailable'] ?? false,
       createdDateTime:
