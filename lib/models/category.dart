@@ -1,22 +1,22 @@
-class Category {
+class ItemCategory {
   String categoryId;
   String vendorId;
   String description;
   int index;
-  Category({
+  ItemCategory({
     required this.categoryId,
     required this.vendorId,
     required this.description,
     required this.index,
   });
 
-  Category copyWith({
+  ItemCategory copyWith({
     String? categoryId,
     String? vendorId,
     String? description,
     int? index,
   }) {
-    return Category(
+    return ItemCategory(
       categoryId: categoryId ?? this.categoryId,
       vendorId: vendorId ?? this.vendorId,
       description: description ?? this.description,
@@ -33,8 +33,8 @@ class Category {
     };
   }
 
-  factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
+  factory ItemCategory.fromMap(Map<String, dynamic> map) {
+    return ItemCategory(
       categoryId: map['categoryId'] ?? '',
       vendorId: map['vendorId'] ?? '',
       description: map['description'] ?? '',

@@ -4,7 +4,7 @@ class Item {
   String itemId;
   String itemName;
   String vendorId;
-  Category category;
+  ItemCategory category;
   double price;
   bool isAvailable;
   DateTime createdDateTime;
@@ -25,7 +25,7 @@ class Item {
     String? itemId,
     String? itemName,
     String? vendorId,
-    Category? category,
+    ItemCategory? category,
     double? price,
     bool? isAvailable,
     DateTime? createdDateTime,
@@ -61,7 +61,7 @@ class Item {
       itemId: map['itemId'] ?? '',
       itemName: map['itemName'] ?? '',
       vendorId: map['vendorId'] ?? '',
-      category: Category.fromMap(map['category']),
+      category: ItemCategory.fromMap(map['category']),
       price: map['price']?.toDouble() ?? 0.0,
       isAvailable: map['isAvailable'] ?? false,
       createdDateTime:
