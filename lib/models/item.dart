@@ -1,8 +1,10 @@
+import 'package:yousual_common/models/category.dart';
+
 class Item {
   String itemId;
   String itemName;
   String vendorId;
-  String category;
+  Category category;
   double price;
   bool isAvailable;
   DateTime createdDateTime;
@@ -10,8 +12,8 @@ class Item {
 
   Item({
     required this.itemId,
-    required this.vendorId,
     required this.itemName,
+    required this.vendorId,
     required this.category,
     required this.price,
     this.isAvailable = true,
@@ -21,9 +23,9 @@ class Item {
 
   Item copyWith({
     String? itemId,
-    String? vendorId,
     String? itemName,
-    String? category,
+    String? vendorId,
+    Category? category,
     double? price,
     bool? isAvailable,
     DateTime? createdDateTime,
@@ -31,8 +33,8 @@ class Item {
   }) {
     return Item(
       itemId: itemId ?? this.itemId,
-      vendorId: vendorId ?? this.vendorId,
       itemName: itemName ?? this.itemName,
+      vendorId: vendorId ?? this.vendorId,
       category: category ?? this.category,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
@@ -44,9 +46,9 @@ class Item {
   Map<String, dynamic> toMap() {
     return {
       'itemId': itemId,
-      'vendorId': vendorId,
       'itemName': itemName,
-      'category': category,
+      'vendorId': vendorId,
+      'category': category.toMap(),
       'price': price,
       'isAvailable': isAvailable,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
@@ -57,9 +59,9 @@ class Item {
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
       itemId: map['itemId'] ?? '',
-      vendorId: map['vendorId'] ?? '',
       itemName: map['itemName'] ?? '',
-      category: map['category'] ?? '',
+      vendorId: map['vendorId'] ?? '',
+      category: Category.fromMap(map['category']),
       price: map['price']?.toDouble() ?? 0.0,
       isAvailable: map['isAvailable'] ?? false,
       createdDateTime:
