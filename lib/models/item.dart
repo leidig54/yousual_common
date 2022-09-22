@@ -1,12 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:yousual_common/models/category.dart';
 
 class Item {
   String itemId;
   String itemName;
   String vendorId;
-  ItemCategory itemCategory;
   double price;
   bool isAvailable;
+  int index;
+  ItumCategory? itumCategory;
   DateTime createdDateTime;
   DateTime? updatedDateTime;
 
@@ -14,9 +17,10 @@ class Item {
     required this.itemId,
     required this.itemName,
     required this.vendorId,
-    required this.itemCategory,
     required this.price,
     this.isAvailable = true,
+    required this.index,
+    this.itumCategory,
     required this.createdDateTime,
     this.updatedDateTime,
   });
@@ -25,9 +29,10 @@ class Item {
     String? itemId,
     String? itemName,
     String? vendorId,
-    ItemCategory? category,
     double? price,
     bool? isAvailable,
+    int? index,
+    ItumCategory? itumCategory,
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
   }) {
@@ -35,22 +40,24 @@ class Item {
       itemId: itemId ?? this.itemId,
       itemName: itemName ?? this.itemName,
       vendorId: vendorId ?? this.vendorId,
-      itemCategory: category ?? itemCategory,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
+      index: index ?? this.index,
+      itumCategory: itumCategory ?? this.itumCategory,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'itemId': itemId,
       'itemName': itemName,
       'vendorId': vendorId,
-      'category': itemCategory.toMap(),
       'price': price,
       'isAvailable': isAvailable,
+      'index': index,
+      'itumCategory': itumCategory?.toMap(),
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
     };
@@ -58,16 +65,20 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      itemId: map['itemId'] ?? '',
-      itemName: map['itemName'] ?? '',
-      vendorId: map['vendorId'] ?? '',
-      itemCategory: ItemCategory.fromMap(map['category']),
-      price: map['price']?.toDouble() ?? 0.0,
-      isAvailable: map['isAvailable'] ?? false,
-      createdDateTime:
-          DateTime.fromMillisecondsSinceEpoch(map['createdDateTime']),
+      itemId: (map['itemId'] ?? '') as String,
+      itemName: (map['itemName'] ?? '') as String,
+      vendorId: (map['vendorId'] ?? '') as String,
+      price: (map['price'] ?? 0.0) as double,
+      isAvailable: (map['isAvailable'] ?? false) as bool,
+      index: (map['index'] ?? 0) as int,
+      itumCategory: map['itumCategory'] != null
+          ? ItumCategory.fromMap(map['itumCategory'] as Map<String, dynamic>)
+          : null,
+      createdDateTime: DateTime.fromMillisecondsSinceEpoch(
+          (map['createdDateTime'] ?? 0) as int),
       updatedDateTime: map['updatedDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['updatedDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['updatedDateTime'] ?? 0) as int)
           : null,
     );
   }
