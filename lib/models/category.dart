@@ -1,10 +1,10 @@
-class ItemCategory {
+class ItumCategory {
   String categoryName;
   String categoryId;
   String vendorId;
   String description;
   int index;
-  ItemCategory({
+  ItumCategory({
     required this.categoryName,
     required this.categoryId,
     required this.vendorId,
@@ -12,14 +12,14 @@ class ItemCategory {
     required this.index,
   });
 
-  ItemCategory copyWith({
+  ItumCategory copyWith({
     String? categoryName,
     String? categoryId,
     String? vendorId,
     String? description,
     int? index,
   }) {
-    return ItemCategory(
+    return ItumCategory(
       categoryName: categoryName ?? this.categoryName,
       categoryId: categoryId ?? this.categoryId,
       vendorId: vendorId ?? this.vendorId,
@@ -38,8 +38,8 @@ class ItemCategory {
     };
   }
 
-  factory ItemCategory.fromMap(Map<String, dynamic> map) {
-    return ItemCategory(
+  factory ItumCategory.fromMap(Map<String, dynamic> map) {
+    return ItumCategory(
       categoryName: map['categoryName'] ?? '',
       categoryId: map['categoryId'] ?? '',
       vendorId: map['vendorId'] ?? '',
