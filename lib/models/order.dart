@@ -112,6 +112,7 @@ class Order {
 
 enum Status {
   creating,
+  paid,
   received,
   processing,
   ready,
