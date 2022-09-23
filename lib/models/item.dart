@@ -112,7 +112,7 @@ class Item {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       extras: List<Extra>.from(
-        (map['extras'] as List<dynamic>).map<Extra>(
+        (map['extras'] ?? []).map<Extra>(
           (x) => Extra.fromMap(x as Map<String, dynamic>),
         ),
       ),
