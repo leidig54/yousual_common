@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:yousual_common/models/item.dart';
 
 class Order {
@@ -7,7 +8,6 @@ class Order {
   String vendorId;
   String vendorName;
   List<Item> items;
-  double price;
   DateTime createdDateTime;
   DateTime? receivedDateTime;
   DateTime? processingDateTime;
@@ -22,7 +22,6 @@ class Order {
     required this.vendorId,
     required this.vendorName,
     this.items = const [],
-    required this.price,
     required this.createdDateTime,
     this.receivedDateTime,
     this.processingDateTime,
@@ -31,6 +30,14 @@ class Order {
     this.status = Status.creating,
   });
 
+  double get price {
+    double standingPrice = 0;
+    for (Item item in items) {
+      standingPrice += item.price;
+    }
+    return standingPrice;
+  }
+
   Order copyWith({
     String? orderId,
     String? userId,
@@ -38,7 +45,6 @@ class Order {
     String? vendorId,
     String? vendorName,
     List<Item>? items,
-    double? price,
     DateTime? createdDateTime,
     DateTime? receivedDateTime,
     DateTime? processingDateTime,
@@ -53,7 +59,6 @@ class Order {
       vendorId: vendorId ?? this.vendorId,
       vendorName: vendorName ?? this.vendorName,
       items: items ?? this.items,
-      price: price ?? this.price,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       receivedDateTime: receivedDateTime ?? this.receivedDateTime,
       processingDateTime: processingDateTime ?? this.processingDateTime,
@@ -64,14 +69,13 @@ class Order {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'orderId': orderId,
       'userId': userId,
       'userName': userName,
       'vendorId': vendorId,
       'vendorName': vendorName,
       'items': items.map((x) => x.toMap()).toList(),
-      'price': price,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'receivedDateTime': receivedDateTime?.millisecondsSinceEpoch,
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
@@ -83,29 +87,35 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
-      orderId: map['orderId'] ?? '',
-      userId: map['userId'] ?? '',
-      userName: map['userName'] ?? '',
-      vendorId: map['vendorId'] ?? '',
-      vendorName: map['vendorName'] ?? '',
+      orderId: (map['orderId'] ?? '') as String,
+      userId: (map['userId'] ?? '') as String,
+      userName: (map['userName'] ?? '') as String,
+      vendorId: (map['vendorId'] ?? '') as String,
+      vendorName: (map['vendorName'] ?? '') as String,
       items: List<Item>.from(
-          map['items']?.map((x) => Item.fromMap(x)) ?? const []),
-      price: map['price']?.toDouble() ?? 0.0,
-      createdDateTime:
-          DateTime.fromMillisecondsSinceEpoch(map['createdDateTime']),
+        (map['items'] as List<int>).map<Item>(
+          (x) => Item.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      createdDateTime: DateTime.fromMillisecondsSinceEpoch(
+          (map['createdDateTime'] ?? 0) as int),
       receivedDateTime: map['receivedDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['receivedDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['receivedDateTime'] ?? 0) as int)
           : null,
       processingDateTime: map['processingDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['processingDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['processingDateTime'] ?? 0) as int)
           : null,
       readyDateTime: map['readyDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['readyDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['readyDateTime'] ?? 0) as int)
           : null,
       completeDateTime: map['completeDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['completeDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['completeDateTime'] ?? 0) as int)
           : null,
-      status: Status.values[map['status'] ?? 0],
+      status: Status.values[(map['status'] ?? 0) as int],
     );
   }
 }
