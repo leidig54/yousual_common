@@ -36,7 +36,7 @@ class Order {
   double get price {
     double standingPrice = 0;
     for (Item item in items) {
-      standingPrice += item.price;
+      standingPrice += item.basePrice;
     }
     return standingPrice;
   }
