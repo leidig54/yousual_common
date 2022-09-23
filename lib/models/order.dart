@@ -93,7 +93,7 @@ class Order {
       vendorId: (map['vendorId'] ?? '') as String,
       vendorName: (map['vendorName'] ?? '') as String,
       items: List<Item>.from(
-        (map['items'] as List<int>).map<Item>(
+        (map['items'] as List<dynamic>).map<Item>(
           (x) => Item.fromMap(x as Map<String, dynamic>),
         ),
       ),
