@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:intl/intl.dart';
 import 'package:yousual_common/models/item.dart';
+
+final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
 class Order {
   String orderId;
@@ -36,6 +39,10 @@ class Order {
       standingPrice += item.price;
     }
     return standingPrice;
+  }
+
+  String get formattedPrice {
+    return formatCurrency.format(price);
   }
 
   Order copyWith({
