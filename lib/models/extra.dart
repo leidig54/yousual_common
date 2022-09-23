@@ -1,3 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:yousual_common/models/ingredient.dart';
+import 'package:yousual_common/models/nutritional_info.dart';
+
 class Extra {
   String extraId;
   String itemId;
@@ -5,6 +9,8 @@ class Extra {
   double price;
   DateTime createdDateTime;
   DateTime? updatedDateTime;
+  NutritionalInfo? nutritionalInfo;
+  List<Ingredient> ingredients;
   Extra({
     required this.extraId,
     required this.itemId,
@@ -12,6 +18,8 @@ class Extra {
     required this.price,
     required this.createdDateTime,
     this.updatedDateTime,
+    this.nutritionalInfo,
+    required this.ingredients,
   });
 
   Extra copyWith({
@@ -21,6 +29,8 @@ class Extra {
     double? price,
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
+    NutritionalInfo? nutritionalInfo,
+    List<Ingredient>? ingredients,
   }) {
     return Extra(
       extraId: extraId ?? this.extraId,
@@ -29,31 +39,45 @@ class Extra {
       price: price ?? this.price,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
+      nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
+      ingredients: ingredients ?? this.ingredients,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'extraId': extraId,
       'itemId': itemId,
       'extraName': extraName,
       'price': price,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
+      'nutritionalInfo': nutritionalInfo?.toMap(),
+      'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
   }
 
   factory Extra.fromMap(Map<String, dynamic> map) {
     return Extra(
-      extraId: map['extraId'] ?? '',
-      itemId: map['itemId'] ?? '',
-      extraName: map['extraName'] ?? '',
-      price: map['price']?.toDouble() ?? 0.0,
-      createdDateTime:
-          DateTime.fromMillisecondsSinceEpoch(map['createdDateTime']),
+      extraId: (map['extraId'] ?? '') as String,
+      itemId: (map['itemId'] ?? '') as String,
+      extraName: (map['extraName'] ?? '') as String,
+      price: (map['price'] ?? 0.0) as double,
+      createdDateTime: DateTime.fromMillisecondsSinceEpoch(
+          (map['createdDateTime'] ?? 0) as int),
       updatedDateTime: map['updatedDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['updatedDateTime'])
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['updatedDateTime'] ?? 0) as int)
           : null,
+      nutritionalInfo: map['nutritionalInfo'] != null
+          ? NutritionalInfo.fromMap(
+              map['nutritionalInfo'] as Map<String, dynamic>)
+          : null,
+      ingredients: List<Ingredient>.from(
+        (map['ingredients'] as List<int>).map<Ingredient>(
+          (x) => Ingredient.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }
