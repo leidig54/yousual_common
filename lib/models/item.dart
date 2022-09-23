@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:yousual_common/models/category.dart';
+import 'package:yousual_common/models/ingredient.dart';
+import 'package:yousual_common/models/nutritional_info.dart';
 
 class Item {
   String itemId;
@@ -12,6 +14,8 @@ class Item {
   ItumCategory? itumCategory;
   DateTime createdDateTime;
   DateTime? updatedDateTime;
+  NutritionalInfo? nutritionalInfo;
+  List<Ingredient> ingredients;
 
   Item({
     required this.itemId,
@@ -23,6 +27,8 @@ class Item {
     this.itumCategory,
     required this.createdDateTime,
     this.updatedDateTime,
+    this.nutritionalInfo,
+    required this.ingredients,
   });
 
   Item copyWith({
@@ -35,6 +41,8 @@ class Item {
     ItumCategory? itumCategory,
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
+    NutritionalInfo? nutritionalInfo,
+    List<Ingredient>? ingredients,
   }) {
     return Item(
       itemId: itemId ?? this.itemId,
@@ -46,6 +54,8 @@ class Item {
       itumCategory: itumCategory ?? this.itumCategory,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
+      nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
+      ingredients: ingredients ?? this.ingredients,
     );
   }
 
@@ -60,6 +70,8 @@ class Item {
       'itumCategory': itumCategory?.toMap(),
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
+      'nutritionalInfo': nutritionalInfo?.toMap(),
+      'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -80,6 +92,15 @@ class Item {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['updatedDateTime'] ?? 0) as int)
           : null,
+      nutritionalInfo: map['nutritionalInfo'] != null
+          ? NutritionalInfo.fromMap(
+              map['nutritionalInfo'] as Map<String, dynamic>)
+          : null,
+      ingredients: List<Ingredient>.from(
+        (map['ingredients'] as List<int>).map<Ingredient>(
+          (x) => Ingredient.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }
