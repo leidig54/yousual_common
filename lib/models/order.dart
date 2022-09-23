@@ -10,7 +10,7 @@ class Order {
   String userName;
   String vendorId;
   String vendorName;
-  List<Item> items;
+  List<Item> items = [];
   DateTime createdDateTime;
   DateTime? receivedDateTime;
   DateTime? processingDateTime;
