@@ -19,9 +19,9 @@ class Item {
   DateTime createdDateTime;
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
-  List<Extra> extras = [];
-  List<String> tags = [];
-  List<Ingredient> ingredients = [];
+  List<Extra> extras;
+  List<String> tags;
+  List<Ingredient> ingredients;
 
   double get price {
     double standingPrice = basePrice;
@@ -123,14 +123,14 @@ class Item {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       extras: List<Extra>.from(
-        (map['extras'] ?? const <Extra>[]).map<Extra>(
+        (map['extras'] as List<int>).map<Extra>(
           (x) => Extra.fromMap(x as Map<String, dynamic>),
         ),
       ),
       tags:
           List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
       ingredients: List<Ingredient>.from(
-        (map['ingredients'] ?? const []).map<Ingredient>(
+        (map['ingredients'] as List<int>).map<Ingredient>(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),

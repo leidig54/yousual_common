@@ -10,8 +10,8 @@ class Extra {
   DateTime createdDateTime;
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
-  List<Ingredient> ingredients = [];
-  List<String> tags = [];
+  List<Ingredient> ingredients;
+  List<String> tags;
 
   Extra({
     required this.extraId,
@@ -80,7 +80,7 @@ class Extra {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       ingredients: List<Ingredient>.from(
-        (map['ingredients'] ?? const <Ingredient>[]).map<Ingredient>(
+        (map['ingredients'] as List<int>).map<Ingredient>(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
