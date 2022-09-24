@@ -3,6 +3,7 @@
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/category.dart';
 import 'package:yousual_common/models/extra.dart';
+import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
@@ -19,6 +20,8 @@ class Item {
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
   List<Extra> extras = [];
+  List<String> tags = [];
+  List<Ingredient> ingredients = [];
 
   double get price {
     double standingPrice = basePrice;
@@ -44,6 +47,8 @@ class Item {
     this.updatedDateTime,
     this.nutritionalInfo,
     required this.extras,
+    required this.tags,
+    required this.ingredients,
   });
 
   Item copyWith({
@@ -58,6 +63,8 @@ class Item {
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
     List<Extra>? extras,
+    List<String>? tags,
+    List<Ingredient>? ingredients,
   }) {
     return Item(
       itemId: itemId ?? this.itemId,
@@ -71,6 +78,8 @@ class Item {
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
       nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
       extras: extras ?? this.extras,
+      tags: tags ?? this.tags,
+      ingredients: ingredients ?? this.ingredients,
     );
   }
 
@@ -87,6 +96,8 @@ class Item {
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
       'extras': extras.map((x) => x.toMap()).toList(),
+      'tags': tags,
+      'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -112,8 +123,15 @@ class Item {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       extras: List<Extra>.from(
-        (map['extras'] ?? []).map<Extra>(
+        (map['extras'] as List<dynamic>).map<Extra>(
           (x) => Extra.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      tags:
+          List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
+      ingredients: List<Ingredient>.from(
+        (map['ingredients'] as List<dynamic>).map<Ingredient>(
+          (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );

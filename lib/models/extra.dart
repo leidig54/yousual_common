@@ -11,6 +11,8 @@ class Extra {
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
   List<Ingredient> ingredients = [];
+  List<String> tags = [];
+
   Extra({
     required this.extraId,
     required this.itemId,
@@ -20,6 +22,7 @@ class Extra {
     this.updatedDateTime,
     this.nutritionalInfo,
     required this.ingredients,
+    required this.tags,
   });
 
   Extra copyWith({
@@ -31,6 +34,7 @@ class Extra {
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
     List<Ingredient>? ingredients,
+    List<String>? tags,
   }) {
     return Extra(
       extraId: extraId ?? this.extraId,
@@ -41,6 +45,7 @@ class Extra {
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
       nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
       ingredients: ingredients ?? this.ingredients,
+      tags: tags ?? this.tags,
     );
   }
 
@@ -54,6 +59,7 @@ class Extra {
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
+      'tags': tags,
     };
   }
 
@@ -74,10 +80,12 @@ class Extra {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       ingredients: List<Ingredient>.from(
-        (map['ingredients'] ?? []).map<Ingredient>(
+        (map['ingredients'] as List<dynamic>).map<Ingredient>(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
+      tags:
+          List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
     );
   }
 }
