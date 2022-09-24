@@ -1,27 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Tag {
-  String name;
+  String tagId;
+  String tagName;
   Tag({
-    required this.name,
+    required this.tagId,
+    required this.tagName,
   });
 
   Tag copyWith({
-    String? name,
+    String? tagId,
+    String? tagName,
   }) {
     return Tag(
-      name: name ?? this.name,
+      tagId: tagId ?? this.tagId,
+      tagName: tagName ?? this.tagName,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'name': name,
+      'tagId': tagId,
+      'tagName': tagName,
     };
   }
 
   factory Tag.fromMap(Map<String, dynamic> map) {
     return Tag(
-      name: (map['name'] ?? '') as String,
+      tagId: (map['tagId'] ?? '') as String,
+      tagName: (map['tagName'] ?? '') as String,
     );
   }
 }
