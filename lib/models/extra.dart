@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
+import 'package:yousual_common/models/tag.dart';
 
 class Extra {
   String extraId;
@@ -11,7 +12,7 @@ class Extra {
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
   List<Ingredient> ingredients;
-  List<String> tags;
+  List<Tag> tags;
 
   Extra({
     required this.extraId,
@@ -34,7 +35,7 @@ class Extra {
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
     List<Ingredient>? ingredients,
-    List<String>? tags,
+    List<Tag>? tags,
   }) {
     return Extra(
       extraId: extraId ?? this.extraId,
@@ -59,7 +60,7 @@ class Extra {
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
-      'tags': tags,
+      'tags': tags.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -84,8 +85,11 @@ class Extra {
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      tags:
-          List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
+      tags: List<Tag>.from(
+        (map['tags'] as List<dynamic>).map<Tag>(
+          (x) => Tag.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }

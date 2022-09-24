@@ -5,6 +5,7 @@ import 'package:yousual_common/models/category.dart';
 import 'package:yousual_common/models/extra.dart';
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
+import 'package:yousual_common/models/tag.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
@@ -20,7 +21,7 @@ class Item {
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
   List<Extra> extras;
-  List<String> tags;
+  List<Tag> tags;
   List<Ingredient> ingredients;
 
   double get price {
@@ -63,7 +64,7 @@ class Item {
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
     List<Extra>? extras,
-    List<String>? tags,
+    List<Tag>? tags,
     List<Ingredient>? ingredients,
   }) {
     return Item(
@@ -96,7 +97,7 @@ class Item {
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
       'extras': extras.map((x) => x.toMap()).toList(),
-      'tags': tags,
+      'tags': tags.map((x) => x.toMap()).toList(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
   }
@@ -127,8 +128,11 @@ class Item {
           (x) => Extra.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      tags:
-          List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
+      tags: List<Tag>.from(
+        (map['tags'] as List<dynamic>).map<Tag>(
+          (x) => Tag.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
       ingredients: List<Ingredient>.from(
         (map['ingredients'] as List<dynamic>).map<Ingredient>(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
