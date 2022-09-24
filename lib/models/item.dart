@@ -123,14 +123,14 @@ class Item {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       extras: List<Extra>.from(
-        (map['extras'] as List<dynamic>).map<Extra>(
+        (map['extras'] ?? const <Extra>[]).map<Extra>(
           (x) => Extra.fromMap(x as Map<String, dynamic>),
         ),
       ),
       tags:
           List<String>.from((map['tags'] ?? const <String>[]) as List<String>),
       ingredients: List<Ingredient>.from(
-        (map['ingredients'] as List<dynamic>).map<Ingredient>(
+        (map['ingredients'] ?? const []).map<Ingredient>(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
