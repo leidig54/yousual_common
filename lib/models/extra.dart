@@ -81,12 +81,12 @@ class Extra {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       ingredients: List<Ingredient>.from(
-        (map['ingredients'] as List<dynamic>).map<Ingredient>(
+        (map['ingredients'] ?? const []).map(
           (x) => Ingredient.fromMap(x as Map<String, dynamic>),
         ),
       ),
       tags: List<Tag>.from(
-        (map['tags'] as List<dynamic>).map<Tag>(
+        (map['tags'] ?? const []).map(
           (x) => Tag.fromMap(x as Map<String, dynamic>),
         ),
       ),
