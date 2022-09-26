@@ -41,6 +41,10 @@ class Order {
     return standingPrice;
   }
 
+  String get formattedCreatedDateTime {
+    return DateFormat('dd.MM.vv HH:mm').format(createdDateTime);
+  }
+
   String get formattedPrice {
     return formatCurrency.format(price);
   }
