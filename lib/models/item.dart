@@ -12,6 +12,7 @@ final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 class Item {
   String itemId;
   String itemName;
+  String? uniqueOrderItemId;
   String vendorId;
   double basePrice;
   bool isAvailable;
@@ -39,6 +40,7 @@ class Item {
   Item({
     required this.itemId,
     required this.itemName,
+    this.uniqueOrderItemId,
     required this.vendorId,
     required this.basePrice,
     this.isAvailable = true,
@@ -55,6 +57,7 @@ class Item {
   Item copyWith({
     String? itemId,
     String? itemName,
+    String? uniqueOrderItemId,
     String? vendorId,
     double? basePrice,
     bool? isAvailable,
@@ -70,6 +73,7 @@ class Item {
     return Item(
       itemId: itemId ?? this.itemId,
       itemName: itemName ?? this.itemName,
+      uniqueOrderItemId: uniqueOrderItemId ?? this.uniqueOrderItemId,
       vendorId: vendorId ?? this.vendorId,
       basePrice: basePrice ?? this.basePrice,
       isAvailable: isAvailable ?? this.isAvailable,
@@ -88,6 +92,7 @@ class Item {
     return <String, dynamic>{
       'itemId': itemId,
       'itemName': itemName,
+      'uniqueOrderItemId': uniqueOrderItemId,
       'vendorId': vendorId,
       'basePrice': basePrice,
       'isAvailable': isAvailable,
@@ -106,6 +111,9 @@ class Item {
     return Item(
       itemId: (map['itemId'] ?? '') as String,
       itemName: (map['itemName'] ?? '') as String,
+      uniqueOrderItemId: map['uniqueOrderItemId'] != null
+          ? map['uniqueOrderItemId'] as String
+          : null,
       vendorId: (map['vendorId'] ?? '') as String,
       basePrice: (map['basePrice'] ?? 0.0) as double,
       isAvailable: (map['isAvailable'] ?? false) as bool,
