@@ -42,7 +42,7 @@ class Order {
   }
 
   String get formattedCreatedDateTime {
-    return DateFormat('dd.MM.vv HH:mm').format(createdDateTime);
+    return DateFormat('MM-dd-yyyyHH:mm').format(createdDateTime);
   }
 
   String get formattedPrice {
