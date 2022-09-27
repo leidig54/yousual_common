@@ -12,6 +12,7 @@ final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 class Item {
   String itemId;
   String itemName;
+  String description;
   String? uniqueOrderItemId;
   String vendorId;
   double basePrice;
@@ -40,6 +41,7 @@ class Item {
   Item({
     required this.itemId,
     required this.itemName,
+    required this.description,
     this.uniqueOrderItemId,
     required this.vendorId,
     required this.basePrice,
@@ -57,6 +59,7 @@ class Item {
   Item copyWith({
     String? itemId,
     String? itemName,
+    String? description,
     String? uniqueOrderItemId,
     String? vendorId,
     double? basePrice,
@@ -73,6 +76,7 @@ class Item {
     return Item(
       itemId: itemId ?? this.itemId,
       itemName: itemName ?? this.itemName,
+      description: description ?? this.description,
       uniqueOrderItemId: uniqueOrderItemId ?? this.uniqueOrderItemId,
       vendorId: vendorId ?? this.vendorId,
       basePrice: basePrice ?? this.basePrice,
@@ -92,6 +96,7 @@ class Item {
     return <String, dynamic>{
       'itemId': itemId,
       'itemName': itemName,
+      'description': description,
       'uniqueOrderItemId': uniqueOrderItemId,
       'vendorId': vendorId,
       'basePrice': basePrice,
@@ -111,6 +116,7 @@ class Item {
     return Item(
       itemId: (map['itemId'] ?? '') as String,
       itemName: (map['itemName'] ?? '') as String,
+      description: (map['description'] ?? '') as String,
       uniqueOrderItemId: map['uniqueOrderItemId'] != null
           ? map['uniqueOrderItemId'] as String
           : null,
