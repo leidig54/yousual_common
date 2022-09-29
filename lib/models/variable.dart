@@ -129,5 +129,4 @@ class Variable {
 enum TypeOfVariable {
   single,
   multiple,
-  boolean,
 }
