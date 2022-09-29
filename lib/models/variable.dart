@@ -1,8 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:yousual_common/models/ingredient.dart';
-import 'package:yousual_common/models/nutritional_info.dart';
 import 'package:yousual_common/models/option.dart';
-import 'package:yousual_common/models/tag.dart';
 
 class Variable {
   String variableId;
@@ -12,9 +9,7 @@ class Variable {
   String variableDescription;
   DateTime createdDateTime;
   DateTime? updatedDateTime;
-  NutritionalInfo? nutritionalInfo;
-  List<Ingredient> ingredients;
-  List<Tag> tags;
+
   bool isRequired;
   List<Option> options;
   // enum
@@ -36,9 +31,6 @@ class Variable {
     required this.variableDescription,
     required this.createdDateTime,
     this.updatedDateTime,
-    this.nutritionalInfo,
-    required this.ingredients,
-    required this.tags,
     required this.isRequired,
     required this.options,
     required this.variableType,
@@ -52,9 +44,6 @@ class Variable {
     String? variableDescription,
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
-    NutritionalInfo? nutritionalInfo,
-    List<Ingredient>? ingredients,
-    List<Tag>? tags,
     bool? isRequired,
     List<Option>? options,
     TypeOfVariable? variableType,
@@ -67,9 +56,6 @@ class Variable {
       variableDescription: variableDescription ?? this.variableDescription,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
-      nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
-      ingredients: ingredients ?? this.ingredients,
-      tags: tags ?? this.tags,
       isRequired: isRequired ?? this.isRequired,
       options: options ?? this.options,
       variableType: variableType ?? this.variableType,
@@ -85,9 +71,6 @@ class Variable {
       'variableDescription': variableDescription,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
-      'nutritionalInfo': nutritionalInfo?.toMap(),
-      'ingredients': ingredients.map((x) => x.toMap()).toList(),
-      'tags': tags.map((x) => x.toMap()).toList(),
       'isRequired': isRequired,
       'options': options.map((x) => x.toMap()).toList(),
       'variableType': variableType.index,
@@ -107,20 +90,6 @@ class Variable {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['updatedDateTime'] ?? 0) as int)
           : null,
-      nutritionalInfo: map['nutritionalInfo'] != null
-          ? NutritionalInfo.fromMap(
-              map['nutritionalInfo'] as Map<String, dynamic>)
-          : null,
-      ingredients: List<Ingredient>.from(
-        (map['ingredients'] ?? const []).map(
-          (x) => Ingredient.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      tags: List<Tag>.from(
-        (map['tags'] ?? const []).map(
-          (x) => Tag.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
       isRequired: (map['isRequired'] ?? false) as bool,
       options: List<Option>.from(
         (map['options'] ?? const []).map(
