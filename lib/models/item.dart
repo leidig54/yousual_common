@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:yousual_common/models/category.dart';
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
-import 'package:yousual_common/models/option.dart';
 import 'package:yousual_common/models/tag.dart';
 import 'package:yousual_common/models/variable.dart';
 
@@ -30,9 +29,7 @@ class Item {
   double get price {
     double standingPrice = basePrice;
     for (Variable variable in variables) {
-      for (Option option in variable.options) {
-        standingPrice += option.price;
-      }
+      standingPrice += variable.price;
     }
     return standingPrice;
   }
