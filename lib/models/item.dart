@@ -5,7 +5,7 @@ import 'package:yousual_common/models/category.dart';
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
 import 'package:yousual_common/models/tag.dart';
-import 'package:yousual_common/models/varible.dart';
+import 'package:yousual_common/models/variable.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
@@ -22,13 +22,13 @@ class Item {
   DateTime createdDateTime;
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
-  List<Variable> extras;
+  List<Variable> variables;
   List<Tag> tags;
   List<Ingredient> ingredients;
 
   double get price {
     double standingPrice = basePrice;
-    for (Variable extra in extras) {
+    for (Variable extra in variables) {
       standingPrice += extra.price;
     }
     return standingPrice;
@@ -51,7 +51,7 @@ class Item {
     required this.createdDateTime,
     this.updatedDateTime,
     this.nutritionalInfo,
-    required this.extras,
+    required this.variables,
     required this.tags,
     required this.ingredients,
   });
@@ -86,7 +86,7 @@ class Item {
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
       nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
-      extras: extras ?? this.extras,
+      variables: extras ?? variables,
       tags: tags ?? this.tags,
       ingredients: ingredients ?? this.ingredients,
     );
@@ -106,7 +106,7 @@ class Item {
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
-      'extras': extras.map((x) => x.toMap()).toList(),
+      'extras': variables.map((x) => x.toMap()).toList(),
       'tags': tags.map((x) => x.toMap()).toList(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
@@ -137,7 +137,7 @@ class Item {
           ? NutritionalInfo.fromMap(
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
-      extras: List<Variable>.from(
+      variables: List<Variable>.from(
         (map['extras'] ?? const []).map(
           (x) => Variable.fromMap(x as Map<String, dynamic>),
         ),
