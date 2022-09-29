@@ -4,9 +4,9 @@ import 'package:yousual_common/models/nutritional_info.dart';
 import 'package:yousual_common/models/tag.dart';
 
 class Variable {
-  String extraId;
+  String variableId;
   String itemId;
-  String extraName;
+  String variableName;
   String vendorId;
   String variableDescription;
   double price;
@@ -21,9 +21,9 @@ class Variable {
   TypeOfVariable variableType;
 
   Variable({
-    required this.extraId,
+    required this.variableId,
     required this.itemId,
-    required this.extraName,
+    required this.variableName,
     required this.vendorId,
     required this.variableDescription,
     required this.price,
@@ -54,9 +54,9 @@ class Variable {
     TypeOfVariable? variableType,
   }) {
     return Variable(
-      extraId: extraId ?? this.extraId,
+      variableId: extraId ?? variableId,
       itemId: itemId ?? this.itemId,
-      extraName: extraName ?? this.extraName,
+      variableName: extraName ?? variableName,
       vendorId: vendorId ?? this.vendorId,
       variableDescription: variableDescription ?? this.variableDescription,
       price: price ?? this.price,
@@ -73,9 +73,9 @@ class Variable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'extraId': extraId,
+      'extraId': variableId,
       'itemId': itemId,
-      'extraName': extraName,
+      'extraName': variableName,
       'vendorId': vendorId,
       'variableDescription': variableDescription,
       'price': price,
@@ -92,9 +92,9 @@ class Variable {
 
   factory Variable.fromMap(Map<String, dynamic> map) {
     return Variable(
-      extraId: (map['extraId'] ?? '') as String,
+      variableId: (map['extraId'] ?? '') as String,
       itemId: (map['itemId'] ?? '') as String,
-      extraName: (map['extraName'] ?? '') as String,
+      variableName: (map['extraName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
       variableDescription: (map['variableDescription'] ?? '') as String,
       price: (map['price'] ?? 0.0) as double,
