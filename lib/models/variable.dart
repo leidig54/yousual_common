@@ -20,6 +20,14 @@ class Variable {
   // enum
   TypeOfVariable variableType;
 
+  double get price {
+    double basePrice = 0;
+    for (Option option in options) {
+      basePrice += option.price;
+    }
+    return basePrice;
+  }
+
   Variable({
     required this.variableId,
     required this.itemId,
