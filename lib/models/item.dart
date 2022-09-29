@@ -2,10 +2,10 @@
 
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/category.dart';
-import 'package:yousual_common/models/extra.dart';
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
 import 'package:yousual_common/models/tag.dart';
+import 'package:yousual_common/models/varible.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
@@ -22,13 +22,13 @@ class Item {
   DateTime createdDateTime;
   DateTime? updatedDateTime;
   NutritionalInfo? nutritionalInfo;
-  List<Extra> extras;
+  List<Variable> extras;
   List<Tag> tags;
   List<Ingredient> ingredients;
 
   double get price {
     double standingPrice = basePrice;
-    for (Extra extra in extras) {
+    for (Variable extra in extras) {
       standingPrice += extra.price;
     }
     return standingPrice;
@@ -69,7 +69,7 @@ class Item {
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
-    List<Extra>? extras,
+    List<Variable>? extras,
     List<Tag>? tags,
     List<Ingredient>? ingredients,
   }) {
@@ -137,9 +137,9 @@ class Item {
           ? NutritionalInfo.fromMap(
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
-      extras: List<Extra>.from(
+      extras: List<Variable>.from(
         (map['extras'] ?? const []).map(
-          (x) => Extra.fromMap(x as Map<String, dynamic>),
+          (x) => Variable.fromMap(x as Map<String, dynamic>),
         ),
       ),
       tags: List<Tag>.from(
