@@ -1,4 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:yousual_common/models/ingredient.dart';
+import 'package:yousual_common/models/nutritional_info.dart';
+import 'package:yousual_common/models/tag.dart';
+
 class Option {
   String optionId;
   String optionName;
@@ -7,6 +11,9 @@ class Option {
   String variableId;
   String vendorId;
   double price;
+  NutritionalInfo? nutritionalInfo;
+  List<Ingredient> ingredients;
+  List<Tag> tags;
   Option({
     required this.optionId,
     required this.optionName,
@@ -15,6 +22,9 @@ class Option {
     required this.variableId,
     required this.vendorId,
     required this.price,
+    this.nutritionalInfo,
+    required this.ingredients,
+    required this.tags,
   });
 
   Option copyWith({
@@ -25,6 +35,9 @@ class Option {
     String? variableId,
     String? vendorId,
     double? price,
+    NutritionalInfo? nutritionalInfo,
+    List<Ingredient>? ingredients,
+    List<Tag>? tags,
   }) {
     return Option(
       optionId: optionId ?? this.optionId,
@@ -34,6 +47,9 @@ class Option {
       variableId: variableId ?? this.variableId,
       vendorId: vendorId ?? this.vendorId,
       price: price ?? this.price,
+      nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
+      ingredients: ingredients ?? this.ingredients,
+      tags: tags ?? this.tags,
     );
   }
 
@@ -46,6 +62,9 @@ class Option {
       'variableId': variableId,
       'vendorId': vendorId,
       'price': price,
+      'nutritionalInfo': nutritionalInfo?.toMap(),
+      'ingredients': ingredients.map((x) => x.toMap()).toList(),
+      'tags': tags.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -58,6 +77,20 @@ class Option {
       variableId: (map['variableId'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
       price: (map['price'] ?? 0.0) as double,
+      nutritionalInfo: map['nutritionalInfo'] != null
+          ? NutritionalInfo.fromMap(
+              map['nutritionalInfo'] as Map<String, dynamic>)
+          : null,
+      ingredients: List<Ingredient>.from(
+        (map['ingredients'] ?? const []).map(
+          (x) => Ingredient.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      tags: List<Tag>.from(
+        (map['tags'] ?? const []).map(
+          (x) => Tag.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }
