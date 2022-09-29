@@ -4,7 +4,7 @@ class Option {
   String optionName;
   String optionDescription;
   String itemId;
-  String extraId;
+  String variableId;
   String vendorId;
   double price;
   Option({
@@ -12,7 +12,7 @@ class Option {
     required this.optionName,
     required this.optionDescription,
     required this.itemId,
-    required this.extraId,
+    required this.variableId,
     required this.vendorId,
     required this.price,
   });
@@ -22,7 +22,7 @@ class Option {
     String? optionName,
     String? optionDescription,
     String? itemId,
-    String? extraId,
+    String? variableId,
     String? vendorId,
     double? price,
   }) {
@@ -31,7 +31,7 @@ class Option {
       optionName: optionName ?? this.optionName,
       optionDescription: optionDescription ?? this.optionDescription,
       itemId: itemId ?? this.itemId,
-      extraId: extraId ?? this.extraId,
+      variableId: variableId ?? this.variableId,
       vendorId: vendorId ?? this.vendorId,
       price: price ?? this.price,
     );
@@ -43,7 +43,7 @@ class Option {
       'optionName': optionName,
       'optionDescription': optionDescription,
       'itemId': itemId,
-      'extraId': extraId,
+      'variableId': variableId,
       'vendorId': vendorId,
       'price': price,
     };
@@ -55,7 +55,7 @@ class Option {
       optionName: (map['optionName'] ?? '') as String,
       optionDescription: (map['optionDescription'] ?? '') as String,
       itemId: (map['itemId'] ?? '') as String,
-      extraId: (map['extraId'] ?? '') as String,
+      variableId: (map['variableId'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
       price: (map['price'] ?? 0.0) as double,
     );

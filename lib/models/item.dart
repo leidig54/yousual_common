@@ -72,7 +72,7 @@ class Item {
     DateTime? createdDateTime,
     DateTime? updatedDateTime,
     NutritionalInfo? nutritionalInfo,
-    List<Variable>? extras,
+    List<Variable>? variables,
     List<Tag>? tags,
     List<Ingredient>? ingredients,
   }) {
@@ -89,7 +89,7 @@ class Item {
       createdDateTime: createdDateTime ?? this.createdDateTime,
       updatedDateTime: updatedDateTime ?? this.updatedDateTime,
       nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
-      variables: extras ?? variables,
+      variables: variables ?? this.variables,
       tags: tags ?? this.tags,
       ingredients: ingredients ?? this.ingredients,
     );
@@ -109,7 +109,7 @@ class Item {
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'updatedDateTime': updatedDateTime?.millisecondsSinceEpoch,
       'nutritionalInfo': nutritionalInfo?.toMap(),
-      'extras': variables.map((x) => x.toMap()).toList(),
+      'variables': variables.map((x) => x.toMap()).toList(),
       'tags': tags.map((x) => x.toMap()).toList(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
     };
@@ -141,7 +141,7 @@ class Item {
               map['nutritionalInfo'] as Map<String, dynamic>)
           : null,
       variables: List<Variable>.from(
-        (map['extras'] ?? const []).map(
+        (map['variables'] ?? const []).map(
           (x) => Variable.fromMap(x as Map<String, dynamic>),
         ),
       ),
