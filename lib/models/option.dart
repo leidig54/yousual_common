@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:intl/intl.dart';
 import 'package:yousual_common/models/ingredient.dart';
 import 'package:yousual_common/models/nutritional_info.dart';
 import 'package:yousual_common/models/tag.dart';
+
+final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
 class Option {
   String optionId;
@@ -26,6 +29,10 @@ class Option {
     required this.ingredients,
     required this.tags,
   });
+
+  String get formattedPrice {
+    return formatCurrency.format(price);
+  }
 
   Option copyWith({
     String? optionId,
