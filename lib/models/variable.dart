@@ -80,8 +80,7 @@ class Variable {
   factory Variable.fromMap(Map<String, dynamic> map) {
     return Variable(
       variableId: (map['variableId'] ?? '') as String,
-      itemIds: List<String>.from(
-          (map['itemIds'] ?? const <String>[]) as List<String>),
+      itemIds: List<String>.from((map['itemIds'] ?? const <String>[])),
       variableName: (map['variableName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
       variableDescription: (map['variableDescription'] ?? '') as String,
