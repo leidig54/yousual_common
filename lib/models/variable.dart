@@ -3,7 +3,7 @@ import 'package:yousual_common/models/option.dart';
 
 class Variable {
   String variableId;
-  String itemId;
+  List<String> itemIds;
   String variableName;
   String vendorId;
   String variableDescription;
@@ -25,7 +25,7 @@ class Variable {
 
   Variable({
     required this.variableId,
-    required this.itemId,
+    required this.itemIds,
     required this.variableName,
     required this.vendorId,
     required this.variableDescription,
@@ -38,7 +38,7 @@ class Variable {
 
   Variable copyWith({
     String? variableId,
-    String? itemId,
+    List<String>? itemIds,
     String? variableName,
     String? vendorId,
     String? variableDescription,
@@ -50,7 +50,7 @@ class Variable {
   }) {
     return Variable(
       variableId: variableId ?? this.variableId,
-      itemId: itemId ?? this.itemId,
+      itemIds: itemIds ?? this.itemIds,
       variableName: variableName ?? this.variableName,
       vendorId: vendorId ?? this.vendorId,
       variableDescription: variableDescription ?? this.variableDescription,
@@ -65,7 +65,7 @@ class Variable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'variableId': variableId,
-      'itemId': itemId,
+      'itemIds': itemIds,
       'variableName': variableName,
       'vendorId': vendorId,
       'variableDescription': variableDescription,
@@ -80,7 +80,8 @@ class Variable {
   factory Variable.fromMap(Map<String, dynamic> map) {
     return Variable(
       variableId: (map['variableId'] ?? '') as String,
-      itemId: (map['itemId'] ?? '') as String,
+      itemIds: List<String>.from(
+          (map['itemIds'] ?? const <String>[]) as List<String>),
       variableName: (map['variableName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
       variableDescription: (map['variableDescription'] ?? '') as String,
