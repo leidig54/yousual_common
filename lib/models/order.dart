@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/item.dart';
 
@@ -92,7 +93,7 @@ class Order {
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
       'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
-      'status': status.index,
+      'status': status.name,
     };
   }
 
@@ -104,7 +105,7 @@ class Order {
       vendorId: (map['vendorId'] ?? '') as String,
       vendorName: (map['vendorName'] ?? '') as String,
       items: List<Item>.from(
-        (map['items'] ?? []).map<Item>(
+        (map['items'] ?? const []).map(
           (x) => Item.fromMap(x as Map<String, dynamic>),
         ),
       ),
@@ -126,12 +127,15 @@ class Order {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['completeDateTime'] ?? 0) as int)
           : null,
-      status: Status.values[(map['status'] ?? 0) as int],
+      status: Status.values
+              .firstWhereOrNull((element) => element.name == map['status']) ??
+          Status.values[0],
     );
   }
 }
 
 enum Status {
+  unknown,
   creating,
   paid,
   sent,
