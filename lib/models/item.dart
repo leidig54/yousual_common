@@ -14,7 +14,7 @@ class Item {
   String description;
   String? uniqueOrderItemId;
   String vendorId;
-  double basePrice;
+  num basePrice;
   bool isAvailable;
   int index;
   DateTime createdDateTime;
@@ -24,8 +24,8 @@ class Item {
   List<Tag> tags;
   List<Ingredient> ingredients;
 
-  double get price {
-    double standingPrice = basePrice;
+  num get price {
+    num standingPrice = basePrice;
     for (Variable variable in variables) {
       standingPrice += variable.price;
     }
@@ -59,7 +59,7 @@ class Item {
     String? description,
     String? uniqueOrderItemId,
     String? vendorId,
-    double? basePrice,
+    num? basePrice,
     bool? isAvailable,
     int? index,
     DateTime? createdDateTime,
@@ -115,7 +115,7 @@ class Item {
           ? map['uniqueOrderItemId'] as String
           : null,
       vendorId: (map['vendorId'] ?? '') as String,
-      basePrice: (map['basePrice'] ?? 0.0) as double,
+      basePrice: (map['basePrice'] ?? 0) as num,
       isAvailable: (map['isAvailable'] ?? false) as bool,
       index: (map['index'] ?? 0) as int,
       createdDateTime: DateTime.fromMillisecondsSinceEpoch(

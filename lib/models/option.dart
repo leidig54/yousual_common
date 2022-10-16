@@ -13,7 +13,7 @@ class Option {
   String itemId;
   String variableId;
   String vendorId;
-  double price;
+  num price;
   NutritionalInfo? nutritionalInfo;
   List<Ingredient> ingredients;
   List<Tag> tags;
@@ -41,7 +41,7 @@ class Option {
     String? itemId,
     String? variableId,
     String? vendorId,
-    double? price,
+    num? price,
     NutritionalInfo? nutritionalInfo,
     List<Ingredient>? ingredients,
     List<Tag>? tags,
@@ -83,7 +83,7 @@ class Option {
       itemId: (map['itemId'] ?? '') as String,
       variableId: (map['variableId'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
-      price: (map['price'] ?? 0.0) as double,
+      price: (map['price'] ?? 0) as num,
       nutritionalInfo: map['nutritionalInfo'] != null
           ? NutritionalInfo.fromMap(
               map['nutritionalInfo'] as Map<String, dynamic>)
