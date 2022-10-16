@@ -33,8 +33,8 @@ class Order {
     this.status = Status.creating,
   });
 
-  double get price {
-    double standingPrice = 0;
+  num get price {
+    num standingPrice = 0;
     for (Item item in items) {
       standingPrice += item.price;
     }
