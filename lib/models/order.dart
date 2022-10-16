@@ -134,6 +134,7 @@ class Order {
 enum Status {
   creating,
   paid,
+  sent,
   received,
   processing,
   ready,
