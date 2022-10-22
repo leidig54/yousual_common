@@ -13,6 +13,7 @@ class Order {
   String vendorName;
   List<Item> items = [];
   DateTime createdDateTime;
+  DateTime? sentDateTime;
   DateTime? receivedDateTime;
   DateTime? processingDateTime;
   DateTime? readyDateTime;
@@ -27,6 +28,7 @@ class Order {
     required this.vendorName,
     this.items = const [],
     required this.createdDateTime,
+    required this.sentDateTime,
     this.receivedDateTime,
     this.processingDateTime,
     this.readyDateTime,
@@ -58,6 +60,7 @@ class Order {
     String? vendorName,
     List<Item>? items,
     DateTime? createdDateTime,
+    DateTime? sentDateTime,
     DateTime? receivedDateTime,
     DateTime? processingDateTime,
     DateTime? readyDateTime,
@@ -72,6 +75,7 @@ class Order {
       vendorName: vendorName ?? this.vendorName,
       items: items ?? this.items,
       createdDateTime: createdDateTime ?? this.createdDateTime,
+      sentDateTime: sentDateTime ?? this.sentDateTime,
       receivedDateTime: receivedDateTime ?? this.receivedDateTime,
       processingDateTime: processingDateTime ?? this.processingDateTime,
       readyDateTime: readyDateTime ?? this.readyDateTime,
@@ -89,6 +93,7 @@ class Order {
       'vendorName': vendorName,
       'items': items.map((x) => x.toMap()).toList(),
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
+      'sentDateTime': sentDateTime?.millisecondsSinceEpoch,
       'receivedDateTime': receivedDateTime?.millisecondsSinceEpoch,
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
@@ -111,6 +116,10 @@ class Order {
       ),
       createdDateTime: DateTime.fromMillisecondsSinceEpoch(
           (map['createdDateTime'] ?? 0) as int),
+      sentDateTime: map['sentDateTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (map['sentDateTime'] ?? 0) as int)
+          : null,
       receivedDateTime: map['receivedDateTime'] != null
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['receivedDateTime'] ?? 0) as int)
