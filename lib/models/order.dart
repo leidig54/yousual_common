@@ -28,7 +28,7 @@ class Order {
     required this.vendorName,
     this.items = const [],
     required this.createdDateTime,
-    required this.sentDateTime,
+    this.sentDateTime,
     this.receivedDateTime,
     this.processingDateTime,
     this.readyDateTime,
