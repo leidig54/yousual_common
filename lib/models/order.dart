@@ -22,10 +22,10 @@ class Order {
   Location location;
 
   // enum
-  Fulfillmentstatus fulfillmentStatus;
+  Fulfillmentstatus fulfillmentstatus;
 
   //enum
-  Paymentstatus paymentStatus;
+  Paymentstatus paymentstatus;
   Order({
     required this.orderId,
     required this.userId,
@@ -40,8 +40,8 @@ class Order {
     this.readyDateTime,
     this.completeDateTime,
     required this.location,
-    required this.fulfillmentStatus,
-    required this.paymentStatus,
+    required this.fulfillmentstatus,
+    required this.paymentstatus,
   });
 
   num get price {
@@ -74,8 +74,8 @@ class Order {
     DateTime? readyDateTime,
     DateTime? completeDateTime,
     Location? location,
-    Fulfillmentstatus? fulfillmentStatus,
-    Paymentstatus? paymentStatus,
+    Fulfillmentstatus? fulfillmentstatus,
+    Paymentstatus? paymentstatus,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -91,8 +91,8 @@ class Order {
       readyDateTime: readyDateTime ?? this.readyDateTime,
       completeDateTime: completeDateTime ?? this.completeDateTime,
       location: location ?? this.location,
-      fulfillmentStatus: fulfillmentStatus ?? this.fulfillmentStatus,
-      paymentStatus: paymentStatus ?? this.paymentStatus,
+      fulfillmentstatus: fulfillmentstatus ?? this.fulfillmentstatus,
+      paymentstatus: paymentstatus ?? this.paymentstatus,
     );
   }
 
@@ -111,8 +111,8 @@ class Order {
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
       'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
       'location': location.toMap(),
-      'fulfillmentStatus': fulfillmentStatus.name,
-      'paymentStatus': paymentStatus.name,
+      'fulfillmentstatus': fulfillmentstatus.name,
+      'paymentstatus': paymentstatus.name,
     };
   }
 
@@ -151,10 +151,10 @@ class Order {
               (map['completeDateTime'] ?? 0) as int)
           : null,
       location: Location.fromMap(map['location'] as Map<String, dynamic>),
-      fulfillmentStatus: Fulfillmentstatus.values.firstWhereOrNull(
+      fulfillmentstatus: Fulfillmentstatus.values.firstWhereOrNull(
               (element) => element.name == map['fulfillmentstatus']) ??
           Fulfillmentstatus.values[0],
-      paymentStatus: Paymentstatus.values.firstWhereOrNull(
+      paymentstatus: Paymentstatus.values.firstWhereOrNull(
               (element) => element.name == map['paymentstatus']) ??
           Paymentstatus.values[0],
     );
