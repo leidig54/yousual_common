@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:collection/collection.dart';
 
 class Location {
@@ -6,25 +7,25 @@ class Location {
   String locationName;
   String vendorId;
   //enum
-  TypeOfLocation locationType;
+  Typeoflocation typeOfLocation;
   Location({
     required this.locationId,
     required this.locationName,
     required this.vendorId,
-    required this.locationType,
+    required this.typeOfLocation,
   });
 
   Location copyWith({
     String? locationId,
     String? locationName,
     String? vendorId,
-    TypeOfLocation? locationType,
+    Typeoflocation? typeOfLocation,
   }) {
     return Location(
       locationId: locationId ?? this.locationId,
       locationName: locationName ?? this.locationName,
       vendorId: vendorId ?? this.vendorId,
-      locationType: locationType ?? this.locationType,
+      typeOfLocation: typeOfLocation ?? this.typeOfLocation,
     );
   }
 
@@ -33,7 +34,7 @@ class Location {
       'locationId': locationId,
       'locationName': locationName,
       'vendorId': vendorId,
-      'locationType': locationType.name,
+      'typeOfLocation': typeOfLocation.name,
     };
   }
 
@@ -42,14 +43,14 @@ class Location {
       locationId: (map['locationId'] ?? '') as String,
       locationName: (map['locationName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
-      locationType: TypeOfLocation.values.firstWhereOrNull(
+      typeOfLocation: Typeoflocation.values.firstWhereOrNull(
               (element) => element.name == map['typeoflocation']) ??
-          TypeOfLocation.values[0],
+          Typeoflocation.values[0],
     );
   }
 }
 
-enum TypeOfLocation {
+enum Typeoflocation {
   internalLoction,
   externalLocation,
   unknownLocation,
