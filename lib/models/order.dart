@@ -19,7 +19,8 @@ class Order {
   DateTime? readyDateTime;
   DateTime? completeDateTime;
   // enum
-  Status status;
+  FulfillmentStatus fulfillmentStatus;
+  PaymentStatus paymentStatus;
   Order({
     required this.orderId,
     required this.userId,
@@ -33,7 +34,8 @@ class Order {
     this.processingDateTime,
     this.readyDateTime,
     this.completeDateTime,
-    this.status = Status.creating,
+    required this.fulfillmentStatus,
+    required this.paymentStatus,
   });
 
   num get price {
@@ -65,7 +67,8 @@ class Order {
     DateTime? processingDateTime,
     DateTime? readyDateTime,
     DateTime? completeDateTime,
-    Status? status,
+    FulfillmentStatus? fulfillmentStatus,
+    PaymentStatus? paymentStatus,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -80,7 +83,8 @@ class Order {
       processingDateTime: processingDateTime ?? this.processingDateTime,
       readyDateTime: readyDateTime ?? this.readyDateTime,
       completeDateTime: completeDateTime ?? this.completeDateTime,
-      status: status ?? this.status,
+      fulfillmentStatus: fulfillmentStatus ?? this.fulfillmentStatus,
+      paymentStatus: paymentStatus ?? this.paymentStatus,
     );
   }
 
@@ -98,7 +102,8 @@ class Order {
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
       'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
-      'status': status.name,
+      'fulfillmentStatus': fulfillmentStatus.name,
+      'paymentStatus': paymentStatus.name,
     };
   }
 
@@ -136,14 +141,17 @@ class Order {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['completeDateTime'] ?? 0) as int)
           : null,
-      status: Status.values
-              .firstWhereOrNull((element) => element.name == map['status']) ??
-          Status.values[0],
+      fulfillmentStatus: FulfillmentStatus.values.firstWhereOrNull(
+              (element) => element.name == map['fulfillmentstatus']) ??
+          FulfillmentStatus.values[0],
+      paymentStatus: PaymentStatus.values.firstWhereOrNull(
+              (element) => element.name == map['paymentstatus']) ??
+          PaymentStatus.values[0],
     );
   }
 }
 
-enum Status {
+enum FulfillmentStatus {
   unknown,
   creating,
   submitted,
@@ -152,4 +160,13 @@ enum Status {
   processing,
   ready,
   complete,
+  userCancelled,
+  vendorCancelled,
+}
+
+enum PaymentStatus {
+  unknown,
+  paid,
+  refunded,
+  unpaid,
 }
