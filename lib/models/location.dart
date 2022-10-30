@@ -5,14 +5,12 @@ class Location {
   String locationId;
   String locationName;
   String vendorId;
-  String userId;
   //enum
   TypeOfLocation locationType;
   Location({
     required this.locationId,
     required this.locationName,
     required this.vendorId,
-    required this.userId,
     required this.locationType,
   });
 
@@ -20,14 +18,12 @@ class Location {
     String? locationId,
     String? locationName,
     String? vendorId,
-    String? userId,
     TypeOfLocation? locationType,
   }) {
     return Location(
       locationId: locationId ?? this.locationId,
       locationName: locationName ?? this.locationName,
       vendorId: vendorId ?? this.vendorId,
-      userId: userId ?? this.userId,
       locationType: locationType ?? this.locationType,
     );
   }
@@ -37,7 +33,6 @@ class Location {
       'locationId': locationId,
       'locationName': locationName,
       'vendorId': vendorId,
-      'userId': userId,
       'locationType': locationType.name,
     };
   }
@@ -47,7 +42,6 @@ class Location {
       locationId: (map['locationId'] ?? '') as String,
       locationName: (map['locationName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
-      userId: (map['userId'] ?? '') as String,
       locationType: TypeOfLocation.values.firstWhereOrNull(
               (element) => element.name == map['typeoflocation']) ??
           TypeOfLocation.values[0],
