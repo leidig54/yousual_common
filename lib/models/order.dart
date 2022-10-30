@@ -2,6 +2,7 @@
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/item.dart';
+import 'package:yousual_common/models/location.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
@@ -18,8 +19,12 @@ class Order {
   DateTime? processingDateTime;
   DateTime? readyDateTime;
   DateTime? completeDateTime;
+  Location location;
+
   // enum
   FulfillmentStatus fulfillmentStatus;
+
+  //enum
   PaymentStatus paymentStatus;
   Order({
     required this.orderId,
@@ -34,6 +39,7 @@ class Order {
     this.processingDateTime,
     this.readyDateTime,
     this.completeDateTime,
+    required this.location,
     required this.fulfillmentStatus,
     required this.paymentStatus,
   });
@@ -67,6 +73,7 @@ class Order {
     DateTime? processingDateTime,
     DateTime? readyDateTime,
     DateTime? completeDateTime,
+    Location? location,
     FulfillmentStatus? fulfillmentStatus,
     PaymentStatus? paymentStatus,
   }) {
@@ -83,6 +90,7 @@ class Order {
       processingDateTime: processingDateTime ?? this.processingDateTime,
       readyDateTime: readyDateTime ?? this.readyDateTime,
       completeDateTime: completeDateTime ?? this.completeDateTime,
+      location: location ?? this.location,
       fulfillmentStatus: fulfillmentStatus ?? this.fulfillmentStatus,
       paymentStatus: paymentStatus ?? this.paymentStatus,
     );
@@ -102,6 +110,7 @@ class Order {
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
       'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
+      'location': location.toMap(),
       'fulfillmentStatus': fulfillmentStatus.name,
       'paymentStatus': paymentStatus.name,
     };
@@ -141,6 +150,7 @@ class Order {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['completeDateTime'] ?? 0) as int)
           : null,
+      location: Location.fromMap(map['location'] as Map<String, dynamic>),
       fulfillmentStatus: FulfillmentStatus.values.firstWhereOrNull(
               (element) => element.name == map['fulfillmentstatus']) ??
           FulfillmentStatus.values[0],
