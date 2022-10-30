@@ -50,7 +50,7 @@ class Location {
 }
 
 enum TypeOfLocation {
-  table,
-  counter,
-  unknown,
+  internalLoction,
+  externalLocation,
+  unknownLocation,
 }
