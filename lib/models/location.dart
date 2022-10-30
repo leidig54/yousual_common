@@ -7,25 +7,25 @@ class Location {
   String locationName;
   String vendorId;
   //enum
-  Typeoflocation typeOfLocation;
+  Typeoflocation typeoflocation;
   Location({
     required this.locationId,
     required this.locationName,
     required this.vendorId,
-    required this.typeOfLocation,
+    required this.typeoflocation,
   });
 
   Location copyWith({
     String? locationId,
     String? locationName,
     String? vendorId,
-    Typeoflocation? typeOfLocation,
+    Typeoflocation? typeoflocation,
   }) {
     return Location(
       locationId: locationId ?? this.locationId,
       locationName: locationName ?? this.locationName,
       vendorId: vendorId ?? this.vendorId,
-      typeOfLocation: typeOfLocation ?? this.typeOfLocation,
+      typeoflocation: typeoflocation ?? this.typeoflocation,
     );
   }
 
@@ -34,7 +34,7 @@ class Location {
       'locationId': locationId,
       'locationName': locationName,
       'vendorId': vendorId,
-      'typeOfLocation': typeOfLocation.name,
+      'typeoflocation': typeoflocation.name,
     };
   }
 
@@ -43,7 +43,7 @@ class Location {
       locationId: (map['locationId'] ?? '') as String,
       locationName: (map['locationName'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
-      typeOfLocation: Typeoflocation.values.firstWhereOrNull(
+      typeoflocation: Typeoflocation.values.firstWhereOrNull(
               (element) => element.name == map['typeoflocation']) ??
           Typeoflocation.values[0],
     );
