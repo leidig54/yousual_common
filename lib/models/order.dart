@@ -22,10 +22,10 @@ class Order {
   Location location;
 
   // enum
-  FulfillmentStatus fulfillmentStatus;
+  Fulfillmentstatus fulfillmentStatus;
 
   //enum
-  PaymentStatus paymentStatus;
+  Paymentstatus paymentStatus;
   Order({
     required this.orderId,
     required this.userId,
@@ -74,8 +74,8 @@ class Order {
     DateTime? readyDateTime,
     DateTime? completeDateTime,
     Location? location,
-    FulfillmentStatus? fulfillmentStatus,
-    PaymentStatus? paymentStatus,
+    Fulfillmentstatus? fulfillmentStatus,
+    Paymentstatus? paymentStatus,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -151,17 +151,17 @@ class Order {
               (map['completeDateTime'] ?? 0) as int)
           : null,
       location: Location.fromMap(map['location'] as Map<String, dynamic>),
-      fulfillmentStatus: FulfillmentStatus.values.firstWhereOrNull(
+      fulfillmentStatus: Fulfillmentstatus.values.firstWhereOrNull(
               (element) => element.name == map['fulfillmentstatus']) ??
-          FulfillmentStatus.values[0],
-      paymentStatus: PaymentStatus.values.firstWhereOrNull(
+          Fulfillmentstatus.values[0],
+      paymentStatus: Paymentstatus.values.firstWhereOrNull(
               (element) => element.name == map['paymentstatus']) ??
-          PaymentStatus.values[0],
+          Paymentstatus.values[0],
     );
   }
 }
 
-enum FulfillmentStatus {
+enum Fulfillmentstatus {
   unknown,
   creating,
   submitted,
@@ -174,7 +174,7 @@ enum FulfillmentStatus {
   vendorCancelled,
 }
 
-enum PaymentStatus {
+enum Paymentstatus {
   unknown,
   paid,
   refunded,
