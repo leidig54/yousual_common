@@ -19,7 +19,7 @@ class Order {
   DateTime? processingDateTime;
   DateTime? readyDateTime;
   DateTime? completeDateTime;
-  Location location;
+  Location? location;
 
   // enum
   Fulfillmentstatus fulfillmentstatus;
@@ -110,7 +110,7 @@ class Order {
       'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
       'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
       'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
-      'location': location.toMap(),
+      'location': location?.toMap(),
       'fulfillmentstatus': fulfillmentstatus.name,
       'paymentstatus': paymentstatus.name,
     };
@@ -150,7 +150,9 @@ class Order {
           ? DateTime.fromMillisecondsSinceEpoch(
               (map['completeDateTime'] ?? 0) as int)
           : null,
-      location: Location.fromMap(map['location'] as Map<String, dynamic>),
+      location: map['location'] != null
+          ? Location.fromMap(map['location'] as Map<String, dynamic>)
+          : null,
       fulfillmentstatus: Fulfillmentstatus.values.firstWhereOrNull(
               (element) => element.name == map['fulfillmentstatus']) ??
           Fulfillmentstatus.values[0],
