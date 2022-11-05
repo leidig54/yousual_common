@@ -37,6 +37,11 @@ class Order {
     return standingPrice;
   }
 
+  Map<String, Timestamp> get sortedFulfillmentStatus {
+    return Map.fromEntries(fulfillmentStatus.entries.toList()
+      ..sort((e1, e2) => e1.value.compareTo(e2.value)));
+  }
+
   String get formattedPrice {
     return formatCurrency.format(price);
   }
