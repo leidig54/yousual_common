@@ -48,7 +48,7 @@ class Order {
   }
 
   String get formattedLatestStatusDateTime {
-    return "${DateFormat.Hm().format(fulfillmentStatus['latestFulfillmentStatus']!.toDate())} ${DateFormat.MMMEd().format(fulfillmentStatus['latestFulfillmentStatus']!.toDate())}";
+    return "${DateFormat.Hm().format(fulfillmentStatus[latestFulfillmentStatus]!.toDate())} ${DateFormat.MMMEd().format(fulfillmentStatus[latestFulfillmentStatus]!.toDate())}";
   }
 
   String? getFormattedStatusDateTime(String status) {
