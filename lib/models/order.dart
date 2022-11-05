@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/item.dart';
 import 'package:yousual_common/models/location.dart';
@@ -13,19 +12,10 @@ class Order {
   String vendorId;
   String vendorName;
   List<Item> items = [];
-  DateTime createdDateTime;
-  DateTime? sentDateTime;
-  DateTime? receivedDateTime;
-  DateTime? processingDateTime;
-  DateTime? readyDateTime;
-  DateTime? completeDateTime;
-  Location? location;
+  Location location;
+  Map<String, DateTime> paymentStatus;
+  Map<String, DateTime> fulfillmentStatus;
 
-  // enum
-  Fulfillmentstatus fulfillmentstatus;
-
-  //enum
-  Paymentstatus paymentstatus;
   Order({
     required this.orderId,
     required this.userId,
@@ -33,15 +23,9 @@ class Order {
     required this.vendorId,
     required this.vendorName,
     this.items = const [],
-    required this.createdDateTime,
-    this.sentDateTime,
-    this.receivedDateTime,
-    this.processingDateTime,
-    this.readyDateTime,
-    this.completeDateTime,
     required this.location,
-    required this.fulfillmentstatus,
-    required this.paymentstatus,
+    required this.paymentStatus,
+    required this.fulfillmentStatus,
   });
 
   num get price {
@@ -50,10 +34,6 @@ class Order {
       standingPrice += item.price;
     }
     return standingPrice;
-  }
-
-  String get formattedCreatedDateTime {
-    return "${DateFormat.Hm().format(createdDateTime)} ${DateFormat.MMMEd().format(createdDateTime)}";
   }
 
   String get formattedPrice {
@@ -67,15 +47,9 @@ class Order {
     String? vendorId,
     String? vendorName,
     List<Item>? items,
-    DateTime? createdDateTime,
-    DateTime? sentDateTime,
-    DateTime? receivedDateTime,
-    DateTime? processingDateTime,
-    DateTime? readyDateTime,
-    DateTime? completeDateTime,
     Location? location,
-    Fulfillmentstatus? fulfillmentstatus,
-    Paymentstatus? paymentstatus,
+    Map<String, DateTime>? paymentStatus,
+    Map<String, DateTime>? fulfillmentStatus,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -84,15 +58,9 @@ class Order {
       vendorId: vendorId ?? this.vendorId,
       vendorName: vendorName ?? this.vendorName,
       items: items ?? this.items,
-      createdDateTime: createdDateTime ?? this.createdDateTime,
-      sentDateTime: sentDateTime ?? this.sentDateTime,
-      receivedDateTime: receivedDateTime ?? this.receivedDateTime,
-      processingDateTime: processingDateTime ?? this.processingDateTime,
-      readyDateTime: readyDateTime ?? this.readyDateTime,
-      completeDateTime: completeDateTime ?? this.completeDateTime,
       location: location ?? this.location,
-      fulfillmentstatus: fulfillmentstatus ?? this.fulfillmentstatus,
-      paymentstatus: paymentstatus ?? this.paymentstatus,
+      paymentStatus: paymentStatus ?? this.paymentStatus,
+      fulfillmentStatus: fulfillmentStatus ?? this.fulfillmentStatus,
     );
   }
 
@@ -104,15 +72,9 @@ class Order {
       'vendorId': vendorId,
       'vendorName': vendorName,
       'items': items.map((x) => x.toMap()).toList(),
-      'createdDateTime': createdDateTime.millisecondsSinceEpoch,
-      'sentDateTime': sentDateTime?.millisecondsSinceEpoch,
-      'receivedDateTime': receivedDateTime?.millisecondsSinceEpoch,
-      'processingDateTime': processingDateTime?.millisecondsSinceEpoch,
-      'readyDateTime': readyDateTime?.millisecondsSinceEpoch,
-      'completeDateTime': completeDateTime?.millisecondsSinceEpoch,
-      'location': location?.toMap(),
-      'fulfillmentstatus': fulfillmentstatus.name,
-      'paymentstatus': paymentstatus.name,
+      'location': location.toMap(),
+      'paymentStatus': paymentStatus,
+      'fulfillmentStatus': fulfillmentStatus,
     };
   }
 
@@ -128,57 +90,11 @@ class Order {
           (x) => Item.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      createdDateTime: DateTime.fromMillisecondsSinceEpoch(
-          (map['createdDateTime'] ?? 0) as int),
-      sentDateTime: map['sentDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['sentDateTime'] ?? 0) as int)
-          : null,
-      receivedDateTime: map['receivedDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['receivedDateTime'] ?? 0) as int)
-          : null,
-      processingDateTime: map['processingDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['processingDateTime'] ?? 0) as int)
-          : null,
-      readyDateTime: map['readyDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['readyDateTime'] ?? 0) as int)
-          : null,
-      completeDateTime: map['completeDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['completeDateTime'] ?? 0) as int)
-          : null,
-      location: map['location'] != null
-          ? Location.fromMap(map['location'] as Map<String, dynamic>)
-          : null,
-      fulfillmentstatus: Fulfillmentstatus.values.firstWhereOrNull(
-              (element) => element.name == map['fulfillmentstatus']) ??
-          Fulfillmentstatus.values[0],
-      paymentstatus: Paymentstatus.values.firstWhereOrNull(
-              (element) => element.name == map['paymentstatus']) ??
-          Paymentstatus.values[0],
+      location: Location.fromMap(map['location'] as Map<String, dynamic>),
+      paymentStatus: Map<String, DateTime>.from(
+          (map['paymentStatus'] ?? const <Map<String, DateTime>>{})),
+      fulfillmentStatus: Map<String, DateTime>.from(
+          (map['fulfillmentStatus'] ?? const <Map<String, DateTime>>{})),
     );
   }
-}
-
-enum Fulfillmentstatus {
-  unknown,
-  creating,
-  submitted,
-  sent,
-  received,
-  processing,
-  ready,
-  complete,
-  userCancelled,
-  vendorCancelled,
-}
-
-enum Paymentstatus {
-  unknown,
-  paid,
-  refunded,
-  unpaid,
 }
