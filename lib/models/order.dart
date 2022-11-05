@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:yousual_common/models/item.dart';
 import 'package:yousual_common/models/location.dart';
@@ -13,8 +14,8 @@ class Order {
   String vendorName;
   List<Item> items = [];
   Location location;
-  Map<String, DateTime> paymentStatus;
-  Map<String, DateTime> fulfillmentStatus;
+  Map<String, Timestamp> paymentStatus;
+  Map<String, Timestamp> fulfillmentStatus;
 
   Order({
     required this.orderId,
@@ -47,14 +48,14 @@ class Order {
   }
 
   String get formattedLatestStatusDateTime {
-    return "${DateFormat.Hm().format(fulfillmentStatus['latestFulfillmentStatus']!)} ${DateFormat.MMMEd().format(fulfillmentStatus['latestFulfillmentStatus']!)}";
+    return "${DateFormat.Hm().format(fulfillmentStatus['latestFulfillmentStatus']!.toDate())} ${DateFormat.MMMEd().format(fulfillmentStatus['latestFulfillmentStatus']!.toDate())}";
   }
 
   String? getFormattedStatusDateTime(String status) {
     if (fulfillmentStatus[status] == null) {
       return null;
     }
-    return "${DateFormat.Hm().format(fulfillmentStatus[status]!)} ${DateFormat.MMMEd().format(fulfillmentStatus[status]!)}";
+    return "${DateFormat.Hm().format(fulfillmentStatus[status]!.toDate())} ${DateFormat.MMMEd().format(fulfillmentStatus[status]!.toDate())}";
   }
 
   Order copyWith({
@@ -65,8 +66,8 @@ class Order {
     String? vendorName,
     List<Item>? items,
     Location? location,
-    Map<String, DateTime>? paymentStatus,
-    Map<String, DateTime>? fulfillmentStatus,
+    Map<String, Timestamp>? paymentStatus,
+    Map<String, Timestamp>? fulfillmentStatus,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -108,10 +109,10 @@ class Order {
         ),
       ),
       location: Location.fromMap(map['location'] as Map<String, dynamic>),
-      paymentStatus: Map<String, DateTime>.from(
-          (map['paymentStatus'] ?? const <Map<String, DateTime>>{})),
-      fulfillmentStatus: Map<String, DateTime>.from(
-          (map['fulfillmentStatus'] ?? const <Map<String, DateTime>>{})),
+      paymentStatus: Map<String, Timestamp>.from(
+          (map['paymentStatus'] ?? const <Map<String, Timestamp>>{})),
+      fulfillmentStatus: Map<String, Timestamp>.from(
+          (map['fulfillmentStatus'] ?? const <Map<String, Timestamp>>{})),
     );
   }
 }
