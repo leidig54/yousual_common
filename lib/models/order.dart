@@ -40,6 +40,12 @@ class Order {
     return formatCurrency.format(price);
   }
 
+  String get latestFulfillmentStatus {
+    var sortedByValueMap = Map.fromEntries(fulfillmentStatus.entries.toList()
+      ..sort((e1, e2) => e1.value.compareTo(e2.value)));
+    return sortedByValueMap.entries.last.key;
+  }
+
   Order copyWith({
     String? orderId,
     String? userId,
