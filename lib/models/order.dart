@@ -46,6 +46,17 @@ class Order {
     return sortedByValueMap.entries.last.key;
   }
 
+  String get formattedLatestStatusDateTime {
+    return "${DateFormat.Hm().format(fulfillmentStatus['latestFulfillmentStatus']!)} ${DateFormat.MMMEd().format(fulfillmentStatus['latestFulfillmentStatus']!)}";
+  }
+
+  String? getFormattedStatusDateTime(String status) {
+    if (fulfillmentStatus[status] == null) {
+      return null;
+    }
+    return "${DateFormat.Hm().format(fulfillmentStatus[status]!)} ${DateFormat.MMMEd().format(fulfillmentStatus[status]!)}";
+  }
+
   Order copyWith({
     String? orderId,
     String? userId,
