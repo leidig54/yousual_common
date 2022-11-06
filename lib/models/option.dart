@@ -31,6 +31,9 @@ class Option {
   });
 
   String get formattedPrice {
+    if (price == 0) {
+      return "-";
+    }
     return formatCurrency.format(price);
   }
 
