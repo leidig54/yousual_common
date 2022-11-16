@@ -13,6 +13,7 @@ class Option {
   String itemId;
   String variableId;
   String vendorId;
+  num index;
   num price;
   NutritionalInfo? nutritionalInfo;
   List<Ingredient> ingredients;
@@ -24,6 +25,7 @@ class Option {
     required this.itemId,
     required this.variableId,
     required this.vendorId,
+    required this.index,
     required this.price,
     this.nutritionalInfo,
     required this.ingredients,
@@ -44,6 +46,7 @@ class Option {
     String? itemId,
     String? variableId,
     String? vendorId,
+    num? index,
     num? price,
     NutritionalInfo? nutritionalInfo,
     List<Ingredient>? ingredients,
@@ -56,6 +59,7 @@ class Option {
       itemId: itemId ?? this.itemId,
       variableId: variableId ?? this.variableId,
       vendorId: vendorId ?? this.vendorId,
+      index: index ?? this.index,
       price: price ?? this.price,
       nutritionalInfo: nutritionalInfo ?? this.nutritionalInfo,
       ingredients: ingredients ?? this.ingredients,
@@ -71,6 +75,7 @@ class Option {
       'itemId': itemId,
       'variableId': variableId,
       'vendorId': vendorId,
+      'index': index,
       'price': price,
       'nutritionalInfo': nutritionalInfo?.toMap(),
       'ingredients': ingredients.map((x) => x.toMap()).toList(),
@@ -86,6 +91,7 @@ class Option {
       itemId: (map['itemId'] ?? '') as String,
       variableId: (map['variableId'] ?? '') as String,
       vendorId: (map['vendorId'] ?? '') as String,
+      index: (map['index'] ?? 0) as num,
       price: (map['price'] ?? 0) as num,
       nutritionalInfo: map['nutritionalInfo'] != null
           ? NutritionalInfo.fromMap(
