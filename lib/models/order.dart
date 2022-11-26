@@ -6,7 +6,7 @@ import 'package:yousual_common/models/location.dart';
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "en_GB");
 
-class Order {
+class YousualOrder {
   String orderId;
   String userId;
   String userName;
@@ -17,7 +17,7 @@ class Order {
   Map<String, Timestamp> paymentStatus;
   Map<String, Timestamp> fulfillmentStatus;
 
-  Order({
+  YousualOrder({
     required this.orderId,
     required this.userId,
     required this.userName,
@@ -63,7 +63,7 @@ class Order {
     return "${DateFormat.Hm().format(fulfillmentStatus[status]!.toDate())} ${DateFormat.MMMEd().format(fulfillmentStatus[status]!.toDate())}";
   }
 
-  Order copyWith({
+  YousualOrder copyWith({
     String? orderId,
     String? userId,
     String? userName,
@@ -74,7 +74,7 @@ class Order {
     Map<String, Timestamp>? paymentStatus,
     Map<String, Timestamp>? fulfillmentStatus,
   }) {
-    return Order(
+    return YousualOrder(
       orderId: orderId ?? this.orderId,
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
@@ -101,8 +101,8 @@ class Order {
     };
   }
 
-  factory Order.fromMap(Map<String, dynamic> map) {
-    return Order(
+  factory YousualOrder.fromMap(Map<String, dynamic> map) {
+    return YousualOrder(
       orderId: (map['orderId'] ?? '') as String,
       userId: (map['userId'] ?? '') as String,
       userName: (map['userName'] ?? '') as String,

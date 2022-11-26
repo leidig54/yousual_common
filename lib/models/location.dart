@@ -45,13 +45,15 @@ class Location {
       vendorId: (map['vendorId'] ?? '') as String,
       typeoflocation: Typeoflocation.values.firstWhereOrNull(
               (element) => element.name == map['typeoflocation']) ??
-          Typeoflocation.values[0],
+          Typeoflocation.unknown,
     );
   }
 }
 
 enum Typeoflocation {
-  internalLoction,
-  externalLocation,
-  unknownLocation,
+  table,
+  counter,
+  onlineTakeaway,
+  onlineCollection,
+  unknown,
 }
