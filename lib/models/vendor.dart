@@ -5,11 +5,13 @@ class Vendor {
   String vendorName;
   DateTime createdDateTime;
   bool isTakingOrders;
+  String resetPasscode;
   Vendor({
     required this.vendorId,
     required this.vendorName,
     required this.createdDateTime,
     required this.isTakingOrders,
+    required this.resetPasscode,
   });
 
   Vendor copyWith({
@@ -17,12 +19,14 @@ class Vendor {
     String? vendorName,
     DateTime? createdDateTime,
     bool? isTakingOrders,
+    String? resetPasscode,
   }) {
     return Vendor(
       vendorId: vendorId ?? this.vendorId,
       vendorName: vendorName ?? this.vendorName,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       isTakingOrders: isTakingOrders ?? this.isTakingOrders,
+      resetPasscode: resetPasscode ?? this.resetPasscode,
     );
   }
 
@@ -32,6 +36,7 @@ class Vendor {
       'vendorName': vendorName,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'isTakingOrders': isTakingOrders,
+      'resetPasscode': resetPasscode,
     };
   }
 
@@ -42,6 +47,7 @@ class Vendor {
       createdDateTime: DateTime.fromMillisecondsSinceEpoch(
           (map['createdDateTime'] ?? 0) as int),
       isTakingOrders: (map['isTakingOrders'] ?? false) as bool,
+      resetPasscode: (map['resetPasscode'] ?? '') as String,
     );
   }
 }
