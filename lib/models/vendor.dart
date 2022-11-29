@@ -5,12 +5,14 @@ class Vendor {
   String vendorName;
   DateTime createdDateTime;
   bool isTakingOrders;
+  bool acceptsPayments;
   String resetPasscode;
   Vendor({
     required this.vendorId,
     required this.vendorName,
     required this.createdDateTime,
     required this.isTakingOrders,
+    required this.acceptsPayments,
     required this.resetPasscode,
   });
 
@@ -19,6 +21,7 @@ class Vendor {
     String? vendorName,
     DateTime? createdDateTime,
     bool? isTakingOrders,
+    bool? acceptsPayments,
     String? resetPasscode,
   }) {
     return Vendor(
@@ -26,6 +29,7 @@ class Vendor {
       vendorName: vendorName ?? this.vendorName,
       createdDateTime: createdDateTime ?? this.createdDateTime,
       isTakingOrders: isTakingOrders ?? this.isTakingOrders,
+      acceptsPayments: acceptsPayments ?? this.acceptsPayments,
       resetPasscode: resetPasscode ?? this.resetPasscode,
     );
   }
@@ -36,6 +40,7 @@ class Vendor {
       'vendorName': vendorName,
       'createdDateTime': createdDateTime.millisecondsSinceEpoch,
       'isTakingOrders': isTakingOrders,
+      'acceptsPayments': acceptsPayments,
       'resetPasscode': resetPasscode,
     };
   }
@@ -47,6 +52,7 @@ class Vendor {
       createdDateTime: DateTime.fromMillisecondsSinceEpoch(
           (map['createdDateTime'] ?? 0) as int),
       isTakingOrders: (map['isTakingOrders'] ?? false) as bool,
+      acceptsPayments: (map['acceptsPayments'] ?? false) as bool,
       resetPasscode: (map['resetPasscode'] ?? '') as String,
     );
   }
